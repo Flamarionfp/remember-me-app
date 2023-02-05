@@ -1,4 +1,5 @@
 import { Box, HStack, Text } from "native-base";
+import { Pressable, TouchableOpacity } from "react-native";
 
 import { ReminderCardType } from "./ReminderCard.types";
 

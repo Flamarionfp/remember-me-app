@@ -24,23 +24,65 @@ export const Reminders = () => {
         "Nulla ex ex, hendrerit hendrerit feugiat ullamcorper, hendrerit id urna. Ut quis felis quis arcu dictum fringilla.",
       notifyDate: "2023-09-01",
     },
+    {
+      id: "4",
+      content:
+        "Nulla ex ex, hendrerit hendrerit feugiat ullamcorper, hendrerit id urna. Ut quis felis quis arcu dictum fringilla.",
+      notifyDate: "2023-09-01",
+    },
+    {
+      id: "5",
+      content:
+        "Nulla ex ex, hendrerit hendrerit feugiat ullamcorper, hendrerit id urna. Ut quis felis quis arcu dictum fringilla.",
+      notifyDate: "2023-09-01",
+    },
+    {
+      id: "6",
+      content:
+        "Nulla ex ex, hendrerit hendrerit feugiat ullamcorper, hendrerit id urna. Ut quis felis quis arcu dictum fringilla.",
+      notifyDate: "2023-09-01",
+    },
+    {
+      id: "7",
+      content:
+        "Nulla ex ex, hendrerit hendrerit feugiat ullamcorper, hendrerit id urna. Ut quis felis quis arcu dictum fringilla.",
+      notifyDate: "2023-09-01",
+    },
+    {
+      id: "8",
+      content:
+        "Nulla ex ex, hendrerit hendrerit feugiat ullamcorper, hendrerit id urna. Ut quis felis quis arcu dictum fringilla.",
+      notifyDate: "2023-09-01",
+    },
+    {
+      id: "9",
+      content:
+        "Nulla ex ex, hendrerit hendrerit feugiat ullamcorper, hendrerit id urna. Ut quis felis quis arcu dictum fringilla.",
+      notifyDate: "2023-09-01",
+    },
+    {
+      id: "10",
+      content:
+        "Nulla ex ex, hendrerit hendrerit feugiat ullamcorper, hendrerit id urna. Ut quis felis quis arcu dictum fringilla.",
+      notifyDate: "2023-09-01",
+    },
   ];
 
   return (
     <Screen>
-      <Box mt="6" flex={1}>
+      <Box mt="5" flex={1}>
         <FlatList
           ItemSeparatorComponent={() => <Box h="4" />}
           data={reminders}
           renderItem={({ item }) => <ReminderCard {...item} />}
           keyExtractor={(item) => item.id}
         />
-        <Box position="absolute" bottom="0" right={0}>
-          <RoundedButton
-            onPress={() => null}
-            icon={<Entypo name="plus" size={24} color="white" />}
-          />
-        </Box>
+      </Box>
+      <Box position="absolute" bottom={8} right={4}>
+        <RoundedButton
+          onPress={() => null}
+          icon={<Entypo name="plus" size={24} color="white" />}
+        />
       </Box>
     </Screen>
   );
