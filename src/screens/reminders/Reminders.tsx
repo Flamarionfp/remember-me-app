@@ -1,7 +1,8 @@
+import { Entypo } from "@expo/vector-icons";
 import { Box } from "native-base";
 import { FlatList } from "react-native";
 
-import { ReminderCard } from "@/src/components";
+import { ReminderCard, RoundedButton } from "@/src/components";
 import { Screen } from "@/src/layouts";
 export const Reminders = () => {
   const reminders = [
@@ -27,13 +28,19 @@ export const Reminders = () => {
 
   return (
     <Screen>
-      <Box mt="6">
+      <Box mt="6" flex={1}>
         <FlatList
           ItemSeparatorComponent={() => <Box h="4" />}
           data={reminders}
           renderItem={({ item }) => <ReminderCard {...item} />}
           keyExtractor={(item) => item.id}
         />
+        <Box position="absolute" bottom="0" right={0}>
+          <RoundedButton
+            onPress={() => null}
+            icon={<Entypo name="plus" size={24} color="white" />}
+          />
+        </Box>
       </Box>
     </Screen>
   );
