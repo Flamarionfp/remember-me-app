@@ -7,7 +7,7 @@ export default function App() {
   return (
     <NativeBaseProvider>
       <Routes />
-      <StatusBar style="light" />
+      <StatusBar style="light" translucent={false} />
     </NativeBaseProvider>
   );
 }

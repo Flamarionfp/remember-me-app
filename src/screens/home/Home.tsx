@@ -1,4 +1,4 @@
-import { Screen } from "@/src/components";
+import { Screen } from "@/src/layouts";
 export const Home = () => {
   return (
     <Screen>
