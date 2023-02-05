@@ -1,9 +1,9 @@
-import { Home } from "@/src/screens";
+import { Reminders } from "@/src/screens";
 
 export const appRoutes = [
   {
     id: "1",
-    name: "Home",
-    component: Home,
+    name: "Reminders",
+    component: Reminders,
   },
 ];
