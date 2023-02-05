@@ -1,10 +1,13 @@
 import { Entypo } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
 import { Box } from "native-base";
 import { FlatList } from "react-native";
 
 import { ReminderCard, RoundedButton } from "@/src/components";
 import { Screen } from "@/src/layouts";
 export const Reminders = () => {
+  const { navigate } = useNavigation();
+
   const reminders = [
     {
       id: "1",
@@ -68,6 +71,10 @@ export const Reminders = () => {
     },
   ];
 
+  const handleScheduleNavigate = () => {
+    navigate("Schedule" as never, {} as never);
+  };
+
   return (
     <Screen>
       <Box mt="5" flex={1}>
@@ -80,7 +87,7 @@ export const Reminders = () => {
       </Box>
       <Box position="absolute" bottom={8} right={4}>
         <RoundedButton
-          onPress={() => null}
+          onPress={handleScheduleNavigate}
           icon={<Entypo name="plus" size={24} color="white" />}
         />
       </Box>
