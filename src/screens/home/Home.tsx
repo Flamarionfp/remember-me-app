@@ -1,11 +1,8 @@
-import { Box, Text } from "native-base";
-
+import { Screen } from "@/src/components";
 export const Home = () => {
   return (
-    <Box bg="gray.800" flex={1} justifyContent="center" alignItems="center">
-      <Text fontSize="2xl" fontWeight="bold" color="white">
-        Hello Expo RN Boilerplate
-      </Text>
-    </Box>
+    <Screen>
+      <></>
+    </Screen>
   );
 };
