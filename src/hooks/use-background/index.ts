@@ -1,8 +1,10 @@
-import { useCallback, useMemo } from "react";
+import { useCallback, useMemo, useEffect, useState } from "react";
 
 import { randomInt } from "@/src/helpers";
 
 export const useBackground = (totalBackgrounds: number) => {
+  const [background, setBackground] = useState(null);
+
   const backgrounds = useMemo(() => {
     return [
       require("../../../assets/backgrounds/background-1.jpg"),
@@ -24,5 +26,9 @@ export const useBackground = (totalBackgrounds: number) => {
     return backgrounds[randomizedBackgroundIndex];
   }, [backgrounds, totalBackgrounds]);
 
-  return { getRandomBackground };
+  useEffect(() => {
+    setBackground(getRandomBackground());
+  }, []);
+
+  return { background };
 };
