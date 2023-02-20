@@ -7,12 +7,17 @@ import { ScreenProps } from "./Screen.types";
 
 import { Header } from "@/src/components";
 import { AppContext } from "@/src/contexts";
+import { HeaderProps } from "@/src/types";
 
 SplashScreen.preventAutoHideAsync();
 export const Screen = (props: ScreenProps) => {
   const { background } = useContext(AppContext);
-  const { showHeader = true, children } = props;
+  const { showHeader = true, isTitleVisible, children } = props;
   const [screenIsReady, setScreenIsReady] = useState(false);
+
+  const headerProps: HeaderProps = {
+    isTitleVisible,
+  };
 
   useEffect(() => {
     async function prepare() {
@@ -38,7 +43,7 @@ export const Screen = (props: ScreenProps) => {
       style={{ flex: 1, paddingHorizontal: "5%", paddingVertical: 48 }}
       source={background}
     >
-      {showHeader && <Header />}
+      {showHeader && <Header {...headerProps} />}
       <StatusBar style="light" translucent={false} />
       {children}
     </ImageBackground>

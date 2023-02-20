@@ -1,13 +1,15 @@
-import { Box, HStack, Text } from "native-base";
-import { Pressable, TouchableOpacity } from "react-native";
+import { Box, Heading, HStack, Text } from "native-base";
 
 import { ReminderCardType } from "./ReminderCard.types";
 
 export const ReminderCard = (props: ReminderCardType) => {
-  const { content } = props;
+  const { title, content } = props;
 
   return (
     <Box bg="gray.500" p="4" rounded="2xl" opacity="0.6">
+      <Heading color="white" fontSize="md">
+        {title}
+      </Heading>
       <Text color="white" noOfLines={3}>
         {content}
       </Text>

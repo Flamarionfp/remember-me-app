@@ -1,30 +1,38 @@
-import { Ionicons, Entypo } from "@expo/vector-icons";
+import { Ionicons, AntDesign } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
 import { Heading, HStack } from "native-base";
 import { TouchableOpacity } from "react-native";
 
-export const Header = () => {
-  const iconButtons = [
-    {
-      id: "1",
-      icon: <Ionicons name="notifications-sharp" size={24} color="white" />,
-      onPress: () => null,
-    },
-    {
-      id: "2",
-      icon: <Entypo name="dots-three-vertical" size={24} color="white" />,
-      onPress: () => null,
-    },
-  ];
+import { Menu } from "./components/Menu";
+
+import { APPLICATION_NAME } from "@/src/constants/app";
+import { HeaderProps } from "@/src/types/header";
+
+export const Header = (props: HeaderProps) => {
+  const {
+    allowBackButton = true,
+    title = APPLICATION_NAME,
+    isTitleVisible = true,
+  } = props;
+
+  const { canGoBack, goBack } = useNavigation();
+
+  const showBackButton = allowBackButton && canGoBack();
 
   return (
     <HStack justifyContent="space-between">
-      <Heading color="white">Remember Me</Heading>
+      {showBackButton && (
+        <TouchableOpacity onPress={() => goBack()}>
+          <AntDesign name="arrowleft" size={24} color="white" />
+        </TouchableOpacity>
+      )}
+      {title && isTitleVisible && <Heading color="white">{title}</Heading>}
+
       <HStack space={8}>
-        {iconButtons.map((button) => (
-          <TouchableOpacity key={button.id} onPress={button.onPress}>
-            {button.icon}
-          </TouchableOpacity>
-        ))}
+        <TouchableOpacity onPress={() => null}>
+          <Ionicons name="notifications-sharp" size={24} color="white" />
+        </TouchableOpacity>
+        <Menu />
       </HStack>
     </HStack>
   );

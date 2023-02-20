@@ -1,4 +1,4 @@
-import React, { createContext, useState, useEffect } from "react";
+import React, { createContext } from "react";
 
 import { AppContextProps, AppContextProviderProps } from "./app-context.types";
 
@@ -8,7 +8,7 @@ const AppContext = createContext<AppContextProps>({} as AppContextProps);
 
 const AppProvider = (props: AppContextProviderProps) => {
   const { children } = props;
-  const { background } = useBackground(10);
+  const { background } = useBackground(1);
 
   const defaultProps: AppContextProps = {
     background,
