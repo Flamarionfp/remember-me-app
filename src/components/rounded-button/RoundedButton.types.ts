@@ -1,4 +1,6 @@
-export interface RoundedButtonProps {
-  icon: any;
+import { IPressableProps } from "native-base";
+
+export interface RoundedButtonProps extends IPressableProps {
+  icon: React.ReactNode;
   onPress: () => void;
 }

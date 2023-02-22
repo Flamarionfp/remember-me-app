@@ -1,4 +1,4 @@
-import { Ionicons, AntDesign } from "@expo/vector-icons";
+import { AntDesign, FontAwesome } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { Heading, HStack } from "native-base";
 import { TouchableOpacity } from "react-native";
@@ -30,7 +30,7 @@ export const Header = (props: HeaderProps) => {
 
       <HStack space={8}>
         <TouchableOpacity onPress={() => null}>
-          <Ionicons name="notifications-sharp" size={24} color="white" />
+          <FontAwesome name="search" size={24} color="white" />
         </TouchableOpacity>
         <Menu />
       </HStack>
