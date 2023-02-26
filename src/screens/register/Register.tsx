@@ -1,35 +1,27 @@
-import { MaterialIcons, Ionicons } from "@expo/vector-icons";
-import { useNavigation } from "@react-navigation/native";
-import { Box, HStack, Text, Checkbox, VStack } from "native-base";
+import { Ionicons } from "@expo/vector-icons";
+import { HStack, Text, Checkbox, VStack } from "native-base";
 import React from "react";
 
 import { Link, Input, Button } from "@/src/components";
 import { Screen, FormWrapper } from "@/src/layouts";
 
 export const Register = () => {
-  const { navigate } = useNavigation();
-
   return (
     <Screen showHeader={false}>
       <FormWrapper title="Crie sua conta para continuar">
         <Input
-          placeholder="E-mail"
-          autoComplete="email"
-          leftElement={
-            <Box px="3">
-              <MaterialIcons name="email" size={24} color="white" />
-            </Box>
-          }
+          placeholder="Nome Completo"
+          autoCapitalize="words"
+          leftIcon={<Ionicons name="person-sharp" size={24} color="white" />}
         />
 
         <Input
-          placeholder="Nome Completo"
-          leftElement={
-            <Box px="3">
-              <Ionicons name="person-sharp" size={24} color="white" />
-            </Box>
-          }
+          keyboardType="number-pad"
+          placeholder="Celular"
+          leftIcon={<Ionicons name="call" size={24} color="white" />}
         />
+
+        <Input variant="email" />
 
         <Input placeholder="Senha" variant="password" />
         <Input placeholder="Confirmar Senha" variant="password" />
@@ -48,12 +40,10 @@ export const Register = () => {
 
         <VStack space={3}>
           <Button onPress={() => null} text="Criar conta" />
-          <Button
-            bg="green.700"
-            onPress={() => navigate("Login" as never)}
-            text="Voltar para o login"
-            p="2"
-          />
+          {/* <HStack justifyContent="center" space={2} my="3">
+            <Text color="white">Já possui uma conta?</Text>
+            <Link route="Login">Clique aqui</Link>
+          </HStack> */}
         </VStack>
       </FormWrapper>
     </Screen>

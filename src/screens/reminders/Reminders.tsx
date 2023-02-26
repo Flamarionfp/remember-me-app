@@ -1,10 +1,12 @@
-import { Entypo } from "@expo/vector-icons";
+import { Entypo, FontAwesome } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { Box } from "native-base";
+import { useMemo } from "react";
 import { FlatList } from "react-native";
 
 import { ReminderCard, RoundedButton } from "@/src/components";
 import { Screen } from "@/src/layouts";
+import { AcionIcon } from "@/src/types";
 export const Reminders = () => {
   const { navigate } = useNavigation();
 
@@ -81,12 +83,21 @@ export const Reminders = () => {
     },
   ];
 
+  const headerIcons = useMemo((): AcionIcon[] => {
+    return [
+      {
+        icon: <FontAwesome name="search" size={24} color="white" />,
+        onIconPress: () => null,
+      },
+    ];
+  }, []);
+
   const handleScheduleNavigate = () => {
     navigate("Schedule" as never, {} as never);
   };
 
   return (
-    <Screen>
+    <Screen actionIcons={headerIcons}>
       <Box mt="5" flex={1}>
         <FlatList
           ItemSeparatorComponent={() => <Box h="4" />}

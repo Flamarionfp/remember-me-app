@@ -7,7 +7,6 @@ import { PasswordInputProps } from "./Input.types";
 import { IconWrapper } from "./components/IconWrapper";
 
 export const PasswordInput = (props: PasswordInputProps) => {
-  const { defaultStyle } = props;
   const [isPasswordVisible, setIsPasswordVisible] = React.useState(false);
 
   const leftIcon = {
@@ -39,7 +38,6 @@ export const PasswordInput = (props: PasswordInputProps) => {
       secureTextEntry={!isPasswordVisible}
       leftElement={leftIcon.component}
       rightElement={rightIcon.component}
-      {...defaultStyle}
       {...props}
     />
   );

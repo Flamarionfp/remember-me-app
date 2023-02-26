@@ -13,8 +13,6 @@ export const Link = (props: LinkProps) => {
     (child) => typeof child === "string"
   );
 
-  console.log("isTextContent", isTextContent);
-
   const handleNavigate = () => {
     try {
       navigate(route as never);

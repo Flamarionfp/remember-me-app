@@ -24,7 +24,7 @@ const LeftIcon = ({ variant }: { variant: DateInputVariant }) => {
 };
 
 export const DateTimeInput = (props: DateTimeInputProps) => {
-  const { inputVariant, defaultStyle } = props;
+  const { inputVariant } = props;
   const [showPicker, setShowPicker] = useState(false);
 
   return (
@@ -33,7 +33,6 @@ export const DateTimeInput = (props: DateTimeInputProps) => {
         <Input
           leftElement={<LeftIcon variant={inputVariant} />}
           isReadOnly
-          {...defaultStyle}
           {...props}
         />
       </Pressable>

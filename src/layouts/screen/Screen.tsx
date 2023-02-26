@@ -12,11 +12,17 @@ import { HeaderProps } from "@/src/types";
 SplashScreen.preventAutoHideAsync();
 export const Screen = (props: ScreenProps) => {
   const { background } = useContext(AppContext);
-  const { showHeader = true, isTitleVisible, children } = props;
+  const {
+    showHeader = true,
+    isTitleVisible,
+    actionIcons = [],
+    children,
+  } = props;
   const [screenIsReady, setScreenIsReady] = useState(false);
 
   const headerProps: HeaderProps = {
     isTitleVisible,
+    actionIcons,
   };
 
   useEffect(() => {

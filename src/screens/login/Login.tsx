@@ -1,27 +1,54 @@
-import { FontAwesome, MaterialIcons } from "@expo/vector-icons";
-import { Box, Text, HStack, Divider } from "native-base";
-import { useState } from "react";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { Text, HStack, Divider } from "native-base";
+import { useEffect } from "react";
+import { FieldErrors, useForm } from "react-hook-form";
 
-import GogleIcon from "../../../assets/icons/google-icon.svg";
+import { LoginFormValues } from "./Login.types";
+import { loginFormSchema } from "./validation";
 
-import { Button, Input, Link, RoundedButton } from "@/src/components";
+import { Button, Input, Link, SocialButton } from "@/src/components";
 import { FormWrapper, Screen } from "@/src/layouts";
 
+const intialValues: LoginFormValues = {
+  email: "",
+  password: "",
+};
 export const Login = () => {
-  const [isProcessing, setIsProcessing] = useState(false);
+  const {
+    watch,
+    register,
+    handleSubmit,
+    reset,
+    getValues,
+    setValue,
+    formState: { errors, isSubmitting, touchedFields },
+  } = useForm<LoginFormValues>({
+    defaultValues: intialValues,
+    resolver: yupResolver(loginFormSchema),
+  });
 
-  const handleLogin = async () => {
+  useEffect(() => {
+    const fields = Object.keys(intialValues) as (keyof LoginFormValues)[];
+
+    fields.forEach((field) => {
+      register(field);
+    });
+  }, []);
+
+  console.log("errors", errors);
+  console.log("touchedFields", touchedFields);
+  console.log("watch", watch());
+
+  const onInvalid = (errors: FieldErrors<LoginFormValues>) => {
+    console.error("errors", errors);
+  };
+
+  const onSubmit = async (data: LoginFormValues) => {
     try {
-      setIsProcessing(true);
-      await new Promise((resolve) => {
-        setTimeout(() => {
-          resolve(true);
-        }, 3000);
-      });
+      console.log("data", data);
+      reset();
     } catch (error) {
-      console.error(error);
-    } finally {
-      setIsProcessing(false);
+      console.error(error); // integrate error message
     }
   };
 
@@ -29,44 +56,33 @@ export const Login = () => {
     <Screen showHeader={false}>
       <FormWrapper title="Faça seu login para continuar">
         <Input
-          placeholder="E-mail"
-          autoComplete="email"
-          leftElement={
-            <Box px="3">
-              <MaterialIcons name="email" size={24} color="white" />
-            </Box>
-          }
+          value={getValues("email")}
+          onChangeText={(text) => setValue("email", text)}
+          variant="email"
+          error={errors.email?.message}
         />
-        <Input placeholder="Senha" variant="password" />
-
+        <Input
+          value={getValues("password")}
+          onChangeText={(text) => setValue("password", text)}
+          placeholder="Senha"
+          variant="password"
+          error={errors.password?.message}
+        />
         <Button
-          onPress={() => handleLogin()}
-          isLoading={isProcessing}
-          disabled={isProcessing}
+          onPress={() => handleSubmit(onSubmit, onInvalid)}
+          isLoading={isSubmitting}
+          disabled={isSubmitting}
           text="Entrar"
         />
-
         <HStack space={2} alignItems="center">
           <Divider w="45%" />
           <Text color="white">OU</Text>
           <Divider w="45%" />
         </HStack>
-
         <HStack justifyContent="center" space={6}>
-          <RoundedButton
-            icon={<GogleIcon />}
-            onPress={() => null}
-            bg="white"
-            p="4"
-          />
-          <RoundedButton
-            icon={<FontAwesome name="facebook-f" size={24} color="white" />}
-            bg="#3b5998"
-            p="4"
-            onPress={() => null}
-          />
+          <SocialButton socialService="google" onPress={() => null} />
+          <SocialButton socialService="facebook" onPress={() => null} />
         </HStack>
-
         <HStack justifyContent="center" space={2}>
           <Text color="white">Ainda não possui uma conta?</Text>
           <Link route="Register">Clique aqui</Link>

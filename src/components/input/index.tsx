@@ -1,50 +1,46 @@
-import { Input as NativeBaseInput, TextArea } from "native-base";
-import { IInputProps } from "native-base/lib/typescript/components/primitives/Input/types";
+import { FormControl, Input as NativeBaseInput, TextArea } from "native-base";
 import React from "react";
 
 import { DateTimeInput } from "./DateTimeInput";
-import { DateInputVariant, InputProps } from "./Input.types";
+import { EmailInput } from "./EmailInput";
+import { InputProps } from "./Input.types";
 import { PasswordInput } from "./PasswordInput";
+import { IconWrapper } from "./components/IconWrapper";
 
-const FOCUS_FIELD_STYLE: IInputProps = {
-  opacity: 0.8,
-  backgroundColor: "white",
-  color: "black",
-  borderWidth: 1,
-  borderColor: "primary.500",
-  placeholderTextColor: "gray.800",
-};
-
-const DEFAULT_STYLE: IInputProps = {
-  bg: "gray.500",
-  color: "white",
-  opacity: "0.6",
-  borderWidth: 0,
-  placeholderTextColor: "white",
-  rounded: "md",
-  p: "3",
-  _focus: FOCUS_FIELD_STYLE,
-};
+import { normalizeInputDateVariant } from "@/src/helpers";
 
 export const Input = (props: InputProps) => {
-  const { variant = "default" } = props;
+  const { variant = "default", error = "", leftIcon = <></> } = props;
 
-  if (variant === "password")
-    return <PasswordInput defaultStyle={DEFAULT_STYLE} {...props} />;
+  const getInputByVariant = () => {
+    if (variant === "email") return <EmailInput {...props} />;
 
-  if (variant === "textArea")
-    return <TextArea autoCompleteType="off" {...DEFAULT_STYLE} {...props} />;
+    if (variant === "password") return <PasswordInput {...props} />;
 
-  if (variant === "date" || variant === "time") {
-    const dateVariant: DateInputVariant = variant === "date" ? "date" : "time";
+    if (variant === "textArea")
+      return <TextArea autoCompleteType="off" {...props} />;
 
+    if (variant === "date" || variant === "time") {
+      const dateVariant = normalizeInputDateVariant(variant);
+
+      return <DateTimeInput inputVariant={dateVariant} {...props} />;
+    }
     return (
-      <DateTimeInput
-        inputVariant={dateVariant}
-        defaultStyle={DEFAULT_STYLE}
+      <NativeBaseInput
         {...props}
+        leftElement={<IconWrapper>{leftIcon}</IconWrapper>}
       />
     );
-  }
-  return <NativeBaseInput {...DEFAULT_STYLE} {...props} />;
+  };
+
+  return (
+    <>
+      <FormControl isInvalid={!!error}>
+        {getInputByVariant()}
+        {!!error && (
+          <FormControl.ErrorMessage>{error}</FormControl.ErrorMessage>
+        )}
+      </FormControl>
+    </>
+  );
 };
