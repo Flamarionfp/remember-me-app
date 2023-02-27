@@ -1,20 +1,31 @@
 import { Entypo } from "@expo/vector-icons";
 import { Menu as NativeBaseMenu, Pressable } from "native-base";
+import { useMemo } from "react";
 
-const menuOptions = [
-  {
-    id: "1",
-    label: "Sobre",
-    onPress: () => null,
-  },
-  {
-    id: "2",
-    label: "Sair",
-    onPress: () => null,
-  },
-];
+import { useAuth } from "@/src/hooks";
 
 export const Menu = () => {
+  const { logout } = useAuth();
+
+  const handleLogout = async () => {
+    await logout();
+  };
+
+  const menuOptions = useMemo(() => {
+    return [
+      {
+        id: "1",
+        label: "Sobre",
+        onPress: () => null,
+      },
+      {
+        id: "2",
+        label: "Sair",
+        onPress: () => handleLogout(),
+      },
+    ];
+  }, []);
+
   return (
     <NativeBaseMenu
       position="relative"

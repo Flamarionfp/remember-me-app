@@ -10,7 +10,12 @@ import { IconWrapper } from "./components/IconWrapper";
 import { normalizeInputDateVariant } from "@/src/helpers";
 
 export const Input = (props: InputProps) => {
-  const { variant = "default", error = "", leftIcon = <></> } = props;
+  const {
+    variant = "default",
+    error = "",
+    touched = false,
+    leftIcon = <></>,
+  } = props;
 
   const getInputByVariant = () => {
     if (variant === "email") return <EmailInput {...props} />;
@@ -33,11 +38,13 @@ export const Input = (props: InputProps) => {
     );
   };
 
+  const hasError = !!error && touched;
+
   return (
     <>
-      <FormControl isInvalid={!!error}>
+      <FormControl isInvalid={hasError}>
         {getInputByVariant()}
-        {!!error && (
+        {hasError && (
           <FormControl.ErrorMessage>{error}</FormControl.ErrorMessage>
         )}
       </FormControl>

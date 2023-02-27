@@ -1,75 +1,67 @@
-import { yupResolver } from "@hookform/resolvers/yup";
+import { useFormik } from "formik";
 import { Text, HStack, Divider } from "native-base";
-import { useEffect } from "react";
-import { FieldErrors, useForm } from "react-hook-form";
+import { Alert } from "react-native";
 
 import { LoginFormValues } from "./Login.types";
 import { loginFormSchema } from "./validation";
 
 import { Button, Input, Link, SocialButton } from "@/src/components";
+import { useAuth } from "@/src/hooks";
 import { FormWrapper, Screen } from "@/src/layouts";
 
-const intialValues: LoginFormValues = {
+const initialValues: LoginFormValues = {
   email: "",
   password: "",
 };
 export const Login = () => {
-  const {
-    watch,
-    register,
-    handleSubmit,
-    reset,
-    getValues,
-    setValue,
-    formState: { errors, isSubmitting, touchedFields },
-  } = useForm<LoginFormValues>({
-    defaultValues: intialValues,
-    resolver: yupResolver(loginFormSchema),
-  });
-
-  useEffect(() => {
-    const fields = Object.keys(intialValues) as (keyof LoginFormValues)[];
-
-    fields.forEach((field) => {
-      register(field);
-    });
-  }, []);
-
-  console.log("errors", errors);
-  console.log("touchedFields", touchedFields);
-  console.log("watch", watch());
-
-  const onInvalid = (errors: FieldErrors<LoginFormValues>) => {
-    console.error("errors", errors);
-  };
+  const { login } = useAuth();
 
   const onSubmit = async (data: LoginFormValues) => {
     try {
-      console.log("data", data);
-      reset();
+      await login(data.email, data.password);
     } catch (error) {
-      console.error(error); // integrate error message
+      console.error(error);
+      Alert.alert("Erro", "Não foi possível fazer login");
     }
   };
+
+  const {
+    touched,
+    values,
+    errors,
+    setFieldValue,
+    setFieldTouched,
+    handleSubmit,
+    isSubmitting,
+  } = useFormik<LoginFormValues>({
+    validateOnBlur: true,
+    initialValues,
+    validationSchema: loginFormSchema,
+    onSubmit,
+  });
 
   return (
     <Screen showHeader={false}>
       <FormWrapper title="Faça seu login para continuar">
         <Input
-          value={getValues("email")}
-          onChangeText={(text) => setValue("email", text)}
+          value={values.email}
+          onBlur={() => setFieldTouched("email")}
+          onChangeText={(text) => setFieldValue("email", text)}
           variant="email"
-          error={errors.email?.message}
+          error={errors?.email}
+          touched={touched?.email}
         />
         <Input
-          value={getValues("password")}
-          onChangeText={(text) => setValue("password", text)}
+          value={values.password}
+          onBlur={() => setFieldTouched("password")}
+          onChangeText={(text) => setFieldValue("password", text)}
           placeholder="Senha"
           variant="password"
-          error={errors.password?.message}
+          touched={touched?.password}
+          error={errors?.password}
         />
         <Button
-          onPress={() => handleSubmit(onSubmit, onInvalid)}
+          onPress={() => handleSubmit()}
           isLoading={isSubmitting}
           disabled={isSubmitting}
           text="Entrar"

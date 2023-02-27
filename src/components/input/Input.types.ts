@@ -14,6 +14,7 @@ export interface InputProps extends IInputProps {
   variant?: InputVariant;
   error?: string;
   leftIcon?: JSX.Element;
+  touched?: boolean;
 }
 
 export interface DateTimeInputProps {
