@@ -1,15 +1,13 @@
 import {
-  getAuth,
   signInWithEmailAndPassword,
   signOut,
   onAuthStateChanged,
 } from "firebase/auth";
 import { useCallback, useState } from "react";
 
-import firebase from "@/src/config/firebase";
+import { auth } from "@/src/config/firebase";
 
 export const useAuth = () => {
-  const auth = getAuth(firebase);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   onAuthStateChanged(auth, (user) => {
