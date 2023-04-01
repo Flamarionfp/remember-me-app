@@ -7,3 +7,4 @@ export * from "./dropdown";
 export * from "./link";
 export * from "./back-button";
 export * from "./social-button";
+export * from "./password-strength";

@@ -1,4 +1,6 @@
 export type FormWrapperProps = {
-  children: React.ReactNode;
   title?: string;
+  showAppLogo?: boolean;
+  showBackButton?: boolean;
+  children: React.ReactNode;
 };

@@ -1,8 +1,6 @@
 import { object } from "yup";
 
-import { UserFormValidator } from "@/src/helpers";
-
-const { validateEmail, validatePassword } = new UserFormValidator();
+import { validateEmail, validatePassword } from "@/src/helpers/validators";
 
 export const loginFormSchema = object({
   email: validateEmail(),

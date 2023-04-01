@@ -50,6 +50,7 @@ export const Login = () => {
           variant="email"
           error={errors?.email}
           touched={touched?.email}
+          returnKeyType="next"
         />
         <Input
           value={values.password}
@@ -59,6 +60,7 @@ export const Login = () => {
           variant="password"
           touched={touched?.password}
           error={errors?.password}
+          onSubmitEditing={() => handleSubmit()}
         />
         <Button
           onPress={() => handleSubmit()}

@@ -1,4 +1,4 @@
-import { Ionicons } from "@expo/vector-icons";
+import { Ionicons, MaterialIcons, FontAwesome5 } from "@expo/vector-icons";
 import { Avatar, Box, Center, Heading, Select, VStack } from "native-base";
 import { useState } from "react";
 
@@ -38,7 +38,12 @@ export const Schedule = () => {
             </Heading>
           </Center>
 
-          <Input placeholder="Título" />
+          <Input
+            placeholder="Título"
+            leftIcon={
+              <MaterialIcons name="subtitles" size={24} color="white" />
+            }
+          />
           <Input placeholder="Descrição" variant="textArea" />
           <Input placeholder="Data da notificação" variant="date" />
           <Input placeholder="Horário da notificação" variant="time" />
@@ -57,6 +62,13 @@ export const Schedule = () => {
               label="Whatsapp"
               value="whatsapp"
               leftIcon={<WhatsappIcon width={24} height={24} />}
+            />
+            <Select.Item
+              label="Telegram"
+              value="Telegram"
+              leftIcon={
+                <FontAwesome5 name="telegram" size={24} color="#2AABEE" />
+              }
             />
             <Select.Item
               label="E-mail"

@@ -4,7 +4,11 @@ import { Box } from "native-base";
 import { useMemo } from "react";
 import { FlatList } from "react-native";
 
-import { ReminderCard, RoundedButton } from "@/src/components";
+import {
+  PasswordStrength,
+  ReminderCard,
+  RoundedButton,
+} from "@/src/components";
 import { Screen } from "@/src/layouts";
 import { AcionIcon } from "@/src/types";
 export const Reminders = () => {
@@ -98,7 +102,11 @@ export const Reminders = () => {
 
   return (
     <Screen actionIcons={headerIcons}>
-      <Box mt="5" flex={1}>
+      <Box flex={1} my="10">
+        <PasswordStrength />
+      </Box>
+
+      {/*  <Box mt="5" flex={1}>
         <FlatList
           ItemSeparatorComponent={() => <Box h="4" />}
           data={reminders}
@@ -111,7 +119,7 @@ export const Reminders = () => {
           onPress={handleScheduleNavigate}
           icon={<Entypo name="plus" size={24} color="white" />}
         />
-      </Box>
+      </Box> */}
     </Screen>
   );
 };

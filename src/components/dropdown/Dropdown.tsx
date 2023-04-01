@@ -17,7 +17,6 @@ export const Dropdown = (props: DropdownProps) => {
       </Box>
       <Select
         bg="gray.500"
-        opacity="0.6"
         borderWidth={0}
         p="3"
         placeholderTextColor="white"

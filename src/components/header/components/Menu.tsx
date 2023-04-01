@@ -15,7 +15,7 @@ export const Menu = () => {
     return [
       {
         id: "1",
-        label: "Sobre",
+        label: "Perfil",
         onPress: () => null,
       },
       {

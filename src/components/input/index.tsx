@@ -1,4 +1,9 @@
-import { FormControl, Input as NativeBaseInput, TextArea } from "native-base";
+import {
+  FormControl,
+  Text,
+  Input as NativeBaseInput,
+  TextArea,
+} from "native-base";
 import React from "react";
 
 import { DateTimeInput } from "./DateTimeInput";
@@ -45,7 +50,9 @@ export const Input = (props: InputProps) => {
       <FormControl isInvalid={hasError}>
         {getInputByVariant()}
         {hasError && (
-          <FormControl.ErrorMessage>{error}</FormControl.ErrorMessage>
+          <Text fontWeight="semibold" color="red.500">
+            {error}
+          </Text>
         )}
       </FormControl>
     </>
